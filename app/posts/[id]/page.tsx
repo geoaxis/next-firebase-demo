@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import {use} from 'react';
+
+import {FC, use} from 'react';
 
 async function getPost(id:string) {
     let post = await fetch(`https://dummyjson.com/posts/${id}`);
@@ -11,7 +11,7 @@ interface Props {
     params: {id: string};
   }
   
-  const Post: NextPage<Props> = (p => {
+  const Post: FC<Props> = (p => {
    let id = p.params.id;
    let post = use(getPost(id))
 
