@@ -3,6 +3,7 @@
 
 import {FC, use} from 'react';
 import { useState, useEffect } from 'react'
+import Loading from '../../loading';
 
 
 
@@ -26,10 +27,11 @@ interface Props {
            })
    }, [])
 
-   if (isLoading) return <p>Loading...</p>
-   if (!data) return <p>No profile data</p>
+   if (isLoading) return <Loading />
+   if (!data) return <p>No post data</p>
    console.log(data)
    
+// @ts-ignore
 
     return <div><h4>{data.title}</h4><p>{data.body}</p></div>;
   });
