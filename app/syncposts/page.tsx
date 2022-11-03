@@ -29,14 +29,7 @@ export default function Page() {
     return (
         <div>
             <ul>
-                {
-                    // @ts-ignore
 
-                    data.posts.map(({ id, title }: any) => {
-
-                        return <li key={id}><Link href={`/syncposts/${id}`}>{title}</Link></li>
-                    })
-                }
             </ul>
         </div>
 
