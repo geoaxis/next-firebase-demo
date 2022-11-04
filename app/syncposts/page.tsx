@@ -3,11 +3,13 @@
  
 import { useState, useEffect } from 'react'
 import Link from 'next/link';
+import Loading from '../loading';
+
 
 
 
 export default function Page() {
-    const [data, setData] =  useState<any[]>([])
+    const [data, setData] =  useState<any>()
     const [isLoading, setLoading] = useState(false)
 
  
@@ -22,17 +24,23 @@ export default function Page() {
             })
     }, [])
 
-    if (isLoading) return <p>Loading...</p>
+    if (isLoading) return <Loading />
     if (!data) return <p>No profile data</p>
-    console.log(data)
-
-    return (
+    if(data) {
+        //console.log(data)
+        return (
         <div>
             <ul>
+                {
+                    
+                    data.posts.map(({ id, title }: any) => {
 
+                        return <li key={id}><Link href={`/syncposts/${id}`}>{title}</Link></li>
+                    })
+                }
             </ul>
         </div>
 
-    )
+    )}
 
 }
