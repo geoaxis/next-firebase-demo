@@ -2,8 +2,9 @@
 'use client';
 
 
-import {FC, use} from 'react';
+import {FC } from 'react';
 import { useState, useEffect } from 'react'
+import Loading from '../../loading';
 
 
 async function getPost(id:string) {
@@ -15,7 +16,8 @@ interface Props {
     params: {id: string};
   }
   
-  const Post: FC<Props> = (p => {
+  //@ts-ignore
+  const Post = (p => {
    let id = p.params.id;
 
    const [data, setData] =  useState<any>()
@@ -35,7 +37,7 @@ interface Props {
 
 
 
-   if (isLoading) return <p>Loading...</p>
+   if (isLoading) return <Loading></Loading>
    if (!data) return <p>No profile data</p>
    if(data) {
     console.log(data)
