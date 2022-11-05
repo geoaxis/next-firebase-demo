@@ -41,7 +41,7 @@ export default function Page() {
             <ul>
                 {
                     
-                    data.map(({ id, title }: any) => {
+                    data.posts.map(({ id, title }: any) => {
 
                         return <li key={id}><Link href={`/syncposts/${id}`}>{title}</Link></li>
                     })

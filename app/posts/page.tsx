@@ -20,7 +20,7 @@ async function getPosts() {
 
 export default function Page() {
 
-    let posts = use(getPosts());
+    let {posts} = use(getPosts());
     
     console.log(posts);
 
