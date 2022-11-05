@@ -27,7 +27,7 @@ const myHeaders = new Headers({
 
    useEffect(() => {
        setLoading(true)
-       fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL + '/' +id}`, obj)
+       fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL}/${id}`, obj)
            .then((res) => res.json())
            .then((data) => {
                setData(data)
