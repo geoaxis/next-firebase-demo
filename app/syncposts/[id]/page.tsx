@@ -18,6 +18,7 @@ const myHeaders = new Headers({
     params: {id: string};
   }
   
+  //@ts-ignore
   const Post: FC<Props> = (p => {
    let id = p.params.id;
 
