@@ -13,7 +13,7 @@ var obj = {
 };
 
 async function getPost(id:string) {
-    let post = await fetch(`${process.env.API_URL + '/' +id}`, obj);
+    let post = await fetch(`${process.env.API_URL}/${id}`, obj);
     console.log(post);
     return post.json();
 }
@@ -25,6 +25,8 @@ interface Props {
   const Post: FC<Props> = (p => {
    let id = p.params.id;
    let post = use(getPost(id))
+
+   
 
     return <div><h4>{post.title}</h4><p>{post.body}</p></div>;
   });

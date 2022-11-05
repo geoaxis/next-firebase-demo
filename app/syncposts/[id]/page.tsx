@@ -2,9 +2,7 @@
 'use client';
 
 
-import { env } from 'process';
-import {FC } from 'react';
-import { useState, useEffect } from 'react'
+import {FC, useEffect, useState } from 'react';
 import Loading from '../../loading';
 
 const myHeaders = new Headers({
@@ -16,8 +14,11 @@ const myHeaders = new Headers({
     headers: myHeaders
   };
   
-  //@ts-ignore
-  const Post = (p => {
+  interface Props {
+    params: {id: string};
+  }
+  
+  const Post: FC<Props> = (p => {
    let id = p.params.id;
 
    const [data, setData] =  useState<any>()
@@ -25,26 +26,24 @@ const myHeaders = new Headers({
 
 
 
-   useEffect(() => {
-       setLoading(true)
-       fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL}/${id}`, obj)
-           .then((res) => res.json())
-           .then((data) => {
-               setData(data)
-               setLoading(false)
-           })
-   }, [])
+  useEffect(() => {
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL}/${id}`, obj)
+        .then((res) => res.json())
+        .then((data) => {
+            setData(data)
+            setLoading(false)
+        })
+}, [])
 
-
-
-   if (isLoading) return <Loading></Loading>
-   if (!data) return <p>No posts data</p>
-   if(data) {
+if (isLoading) return <Loading />
+    if (!data) return <p>No profile data</p>
+    if(data) {
     console.log(data)
-
     return <div><h4>{data.title}</h4><p>{data.body}</p></div>;
-   }
+    }
   });
+
 
 
 export default Post;
