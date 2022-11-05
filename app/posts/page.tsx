@@ -14,22 +14,21 @@ const myHeaders = new Headers({
   };
 
 async function getPosts() {
-    let posts = await fetch(process.env.API_URL + "?limit=3", obj);
-
+    let posts = await fetch(`${process.env.API_URL}`, obj);
     return posts.json();
 }
 
 export default function Page() {
 
-    let {content} = use(getPosts());
+    let posts = use(getPosts());
     
-    console.log(content);
+    console.log(posts);
 
     return (
         <div>
             <ul>
              {
-                 content.map(({id, title}: any) => {
+                 posts.map(({id, title}: any) => {
        
                     return <li key={id}><Link href={`/posts/${id}`}>{title}</Link></li>
                  })
