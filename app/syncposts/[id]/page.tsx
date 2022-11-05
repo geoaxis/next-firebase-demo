@@ -2,19 +2,19 @@
 'use client';
 
 
+import { env } from 'process';
 import {FC } from 'react';
 import { useState, useEffect } from 'react'
 import Loading from '../../loading';
 
-
-async function getPost(id:string) {
-    let post = await fetch(`https://dummyjson.com/syncposts/${id}`);
-    return post.json();
-}
-
-interface Props {
-    params: {id: string};
-  }
+const myHeaders = new Headers({
+    "Authorization": 'Basic '+process.env.NEXT_PUBLIC_STATIC_API_KEY
+  });
+  
+  var obj = {  
+    method: 'GET',
+    headers: myHeaders
+  };
   
   //@ts-ignore
   const Post = (p => {
@@ -27,7 +27,7 @@ interface Props {
 
    useEffect(() => {
        setLoading(true)
-       fetch(`https://dummyjson.com/posts/${id}`)
+       fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL + '/' +id}`, obj)
            .then((res) => res.json())
            .then((data) => {
                setData(data)
@@ -38,7 +38,7 @@ interface Props {
 
 
    if (isLoading) return <Loading></Loading>
-   if (!data) return <p>No profile data</p>
+   if (!data) return <p>No posts data</p>
    if(data) {
     console.log(data)
 

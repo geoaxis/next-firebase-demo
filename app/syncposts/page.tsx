@@ -11,12 +11,20 @@ import Loading from '../loading';
 export default function Page() {
     const [data, setData] =  useState<any>()
     const [isLoading, setLoading] = useState(false)
-
+    
+    const myHeaders = new Headers({
+        "Authorization": 'Basic '+process.env.NEXT_PUBLIC_STATIC_API_KEY
+      });
+      
+      var obj = {  
+        method: 'GET',
+        headers: myHeaders
+      };
  
 
     useEffect(() => {
         setLoading(true)
-        fetch("https://dummyjson.com/posts?limit=3")
+        fetch(process.env.NEXT_PUBLIC_STATIC_API_URL + "?limit=3", obj)
             .then((res) => res.json())
             .then((data) => {
                 setData(data)
@@ -27,13 +35,13 @@ export default function Page() {
     if (isLoading) return <Loading />
     if (!data) return <p>No profile data</p>
     if(data) {
-        //console.log(data)
+        console.log(data)
         return (
         <div>
             <ul>
                 {
                     
-                    data.posts.map(({ id, title }: any) => {
+                    data.content.map(({ id, title }: any) => {
 
                         return <li key={id}><Link href={`/syncposts/${id}`}>{title}</Link></li>
                     })
