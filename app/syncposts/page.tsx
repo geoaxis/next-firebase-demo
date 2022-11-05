@@ -24,7 +24,7 @@ export default function Page() {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL}?limit=3`, obj)
+        fetch(`${process.env.NEXT_PUBLIC_STATIC_API_URL}`, obj)
             .then((res) => res.json())
             .then((data) => {
                 setData(data)
